@@ -163,8 +163,6 @@ function setupEventListeners() {
     });
 
     // Add buttons: +1 of that denomination
-    // NOTE: use raw dataset.value string ("0.10") as key — parseFloat("0.10") becomes 0.1
-    // which creates a mismatched "0.1" key and breaks the dime counter.
     document.querySelectorAll('.add-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const type = btn.dataset.type;
@@ -256,7 +254,6 @@ function generateNewProblem() {
 
     } else {
         // Cashier Mode: Calculate Change & Pay
-        // Hide the answer — do NOT show target change amount. Student must calculate it in Step 1.
         scenarioTitle.textContent = "Cashier Transaction";
         targetLabel.textContent = "Change Due: ??? (do Step 1!)";
         targetAmountEl.textContent = "$ ???";
@@ -365,11 +362,9 @@ function renderCashierScenario() {
         <div>💵 <b>Customer Handed:</b> <span style="color:var(--secondary); font-size:20px;">$${gameState.customerPayment.toFixed(2)}</span></div>
         <div>🧮 <b>Your calculation (Step 1):</b> <span id="your-calc-preview" style="color:var(--primary);">$ ???</span></div>
     `;
-    // IMPORTANT: never reveal the real answer here. Keep "$ ???" until submit validates Step 1.
     targetLabel.textContent = "Change Due: ??? (do Step 1!)";
     targetAmountEl.textContent = "$ ???";
 
-    // Live preview of what THEY typed (not the answer) so they know their entry registered.
     const previewEl = document.getElementById('your-calc-preview');
     if (changeCalcInput && previewEl) {
         const refreshPreview = () => {
@@ -418,7 +413,6 @@ function updateUI() {
             countEl.textContent = count;
             countEl.style.display = count > 0 ? 'flex' : 'none';
         }
-        // Disable remove buttons when count is 0 so kids get clear visual feedback
         document.querySelectorAll(`.remove-btn[data-value="${val}"]`).forEach(rBtn => {
             const c = gameState.selectedCurrency[val] || 0;
             rBtn.disabled = c <= 0;
