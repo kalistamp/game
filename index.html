@@ -32,7 +32,7 @@
             </div>
             <div class="stat-box difficulty-box">
                 <span class="stat-label">Difficulty</span>
-                <select id="difficulty-select">
+                <select id="difficulty-select" aria-label="Select difficulty">
                     <option value="easy">Easy (Whole $ / Quarters)</option>
                     <option value="medium" selected>Medium (Standard Cents)</option>
                     <option value="hard">Hard (All Coins & Bills)</option>
@@ -41,9 +41,9 @@
         </div>
 
         <!-- Mode Selector Tabs -->
-        <div class="mode-tabs">
-            <button class="mode-tab active" data-mode="buyer">🛒 Buyer Mode (Manual Shopping)</button>
-            <button class="mode-tab" data-mode="cashier">💵 Cashier Mode (Calculate & Make Change)</button>
+        <div class="mode-tabs" role="tablist">
+            <button class="mode-tab active" data-mode="buyer" role="tab" aria-selected="true">🛒 Buyer Mode</button>
+            <button class="mode-tab" data-mode="cashier" role="tab" aria-selected="false">💵 Cashier Mode</button>
         </div>
 
         <!-- Main Game Area -->
@@ -52,103 +52,107 @@
             <section class="scenario-card">
                 <div class="scenario-header">
                     <h2 id="scenario-title">Shopping Cart</h2>
-                    <span id="problem-level-badge" class="badge">Level 2</span>
+                    <span id="problem-level-badge" class="badge">Level: MEDIUM</span>
                 </div>
                 
                 <!-- Buyer Mode: Store Shelf & Active Cart -->
                 <div id="buyer-workspace" class="mode-workspace">
                     <div class="shelf-section">
-                        <h4>🏪 Store Shelf (Click to Add Items)</h4>
-                        <div id="store-shelf" class="store-shelf">
-                            <!-- Dynamically populated store items -->
+                        <h4>🏪 Store Shelf <span class="hint">(tap to add)</span></h4>
+                        <div id="store-shelf" class="store-shelf" role="list">
+                            <!-- Dynamically populated -->
                         </div>
                     </div>
                     <div class="cart-section">
-                        <h4>🛍️ Your Shopping Cart</h4>
+                        <h4>🛍️ Your Cart <span class="hint">(tap item to remove)</span></h4>
                         <div id="active-cart" class="active-cart">
-                            <span class="empty-cart-msg">Your cart is empty. Click items above to add them!</span>
+                            <span class="empty-cart-msg">Your cart is empty. Tap items above to start shopping!</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cashier Mode: Transaction & Change Calculation -->
+                <!-- Cashier Mode -->
                 <div id="cashier-workspace" class="mode-workspace hidden">
                     <div id="cashier-scenario-content" class="cashier-scenario-content">
-                        <!-- Dynamically populated customer purchase details -->
+                        <!-- Dynamically populated -->
                     </div>
                     <div class="change-calc-box">
-                        <label for="change-calc-input">🧮 Step 1: Calculate Change Due ($):</label>
+                        <label for="change-calc-input">🧮 Step 1: Enter Change Due</label>
                         <div class="calc-input-wrapper">
                             <span class="currency-symbol">$</span>
-                            <input type="number" id="change-calc-input" step="0.01" placeholder="0.00">
+                            <input type="number" id="change-calc-input" step="0.01" min="0" placeholder="0.00" inputmode="decimal">
                         </div>
                     </div>
                 </div>
 
-                <div class="target-display">
-                    <span id="target-label">Amount Due:</span>
+                <!-- Prominent Target -->
+                <div class="target-display" id="target-display">
+                    <span id="target-label">Amount Due</span>
                     <span id="target-amount" class="highlight-amount">$0.00</span>
                 </div>
             </section>
 
-            <!-- Currency Selection & Wallet Area -->
+            <!-- Currency Selection -->
             <section class="currency-workspace">
-                <h3>Select Bills & Coins <span class="tip-text">(Double-click any bill to remove 1)</span></h3>
+                <h3>
+                    Select Bills & Coins
+                    <span class="tip-text">Tap to add • Double-tap bill to remove one</span>
+                </h3>
                 <div class="currency-groups">
-                    <!-- Bills Group with Real Currency Visuals -->
+                    <!-- Bills -->
                     <div class="currency-group">
-                        <h4>Bills (Realistic US Currency)</h4>
+                        <h4>Bills</h4>
                         <div class="currency-grid bills-grid">
-                            <button class="curr-btn bill-btn bill-20" data-type="bill" data-value="20" title="Double-click to remove one">
+                            <button class="curr-btn bill-btn" data-type="bill" data-value="20" title="Double-tap to remove one" aria-label="Add $20 bill">
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#0288d1" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#b3e5fc" opacity="0.6"/>
                                         <text x="60" y="24" font-size="10" font-weight="bold" text-anchor="middle" fill="#01579b">20</text>
-                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#0277bd">TWENTY DOLLARS</text>
+                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#0277bd">TWENTY</text>
                                         <text x="14" y="16" font-size="8" font-weight="bold" fill="#01579b">$20</text>
                                         <text x="106" y="48" font-size="8" font-weight="bold" text-anchor="end" fill="#01579b">$20</text>
                                     </svg>
                                 </div>
                                 <span class="curr-count" id="count-bill-20">0</span>
                             </button>
-                            <button class="curr-btn bill-btn bill-10" data-type="bill" data-value="10" title="Double-click to remove one">
+                            <button class="curr-btn bill-btn" data-type="bill" data-value="10" title="Double-tap to remove one" aria-label="Add $10 bill">
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#f57c00" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#ffe0b2" opacity="0.6"/>
                                         <text x="60" y="24" font-size="10" font-weight="bold" text-anchor="middle" fill="#e65100">10</text>
-                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#ef6c00">TEN DOLLARS</text>
+                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#ef6c00">TEN</text>
                                         <text x="14" y="16" font-size="8" font-weight="bold" fill="#e65100">$10</text>
                                         <text x="106" y="48" font-size="8" font-weight="bold" text-anchor="end" fill="#e65100">$10</text>
                                     </svg>
                                 </div>
                                 <span class="curr-count" id="count-bill-10">0</span>
                             </button>
-                            <button class="curr-btn bill-btn bill-5" data-type="bill" data-value="5" title="Double-click to remove one">
+                            <button class="curr-btn bill-btn" data-type="bill" data-value="5" title="Double-tap to remove one" aria-label="Add $5 bill">
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#7b1fa2" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#e1bee7" opacity="0.6"/>
                                         <text x="60" y="24" font-size="10" font-weight="bold" text-anchor="middle" fill="#4a148c">5</text>
-                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#6a1b9a">FIVE DOLLARS</text>
+                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#6a1b9a">FIVE</text>
                                         <text x="14" y="16" font-size="8" font-weight="bold" fill="#4a148c">$5</text>
                                         <text x="106" y="48" font-size="8" font-weight="bold" text-anchor="end" fill="#4a148c">$5</text>
                                     </svg>
                                 </div>
                                 <span class="curr-count" id="count-bill-5">0</span>
                             </button>
-                            <button class="curr-btn bill-btn bill-1" data-type="bill" data-value="1" title="Double-click to remove one">
+                            <button class="curr-btn bill-btn" data-type="bill" data-value="1" title="Double-tap to remove one" aria-label="Add $1 bill">
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#388e3c" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#c8e6c9" opacity="0.6"/>
                                         <text x="60" y="24" font-size="10" font-weight="bold" text-anchor="middle" fill="#1b5e20">1</text>
-                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#2e7d32">ONE DOLLAR</text>
+                                        <text x="60" y="34" font-size="6" text-anchor="middle" fill="#2e7d32">ONE</text>
                                         <text x="14" y="16" font-size="8" font-weight="bold" fill="#1b5e20">$1</text>
                                         <text x="106" y="48" font-size="8" font-weight="bold" text-anchor="end" fill="#1b5e20">$1</text>
                                     </svg>
@@ -158,26 +162,26 @@
                         </div>
                     </div>
 
-                    <!-- Coins Group -->
+                    <!-- Coins -->
                     <div class="currency-group">
                         <h4>Coins</h4>
                         <div class="currency-grid coins-grid">
-                            <button class="curr-btn coin-btn quarter" data-type="coin" data-value="0.25">
+                            <button class="curr-btn coin-btn quarter" data-type="coin" data-value="0.25" aria-label="Add quarter">
                                 <span class="curr-name">Quarter</span>
                                 <span class="curr-sub">25¢</span>
                                 <span class="curr-count" id="count-coin-0.25">0</span>
                             </button>
-                            <button class="curr-btn coin-btn dime" data-type="coin" data-value="0.10">
+                            <button class="curr-btn coin-btn dime" data-type="coin" data-value="0.10" aria-label="Add dime">
                                 <span class="curr-name">Dime</span>
                                 <span class="curr-sub">10¢</span>
                                 <span class="curr-count" id="count-coin-0.10">0</span>
                             </button>
-                            <button class="curr-btn coin-btn nickel" data-type="coin" data-value="0.05">
+                            <button class="curr-btn coin-btn nickel" data-type="coin" data-value="0.05" aria-label="Add nickel">
                                 <span class="curr-name">Nickel</span>
                                 <span class="curr-sub">5¢</span>
                                 <span class="curr-count" id="count-coin-0.05">0</span>
                             </button>
-                            <button class="curr-btn coin-btn penny" data-type="coin" data-value="0.01">
+                            <button class="curr-btn coin-btn penny" data-type="coin" data-value="0.01" aria-label="Add penny">
                                 <span class="curr-name">Penny</span>
                                 <span class="curr-sub">1¢</span>
                                 <span class="curr-count" id="count-coin-0.01">0</span>
@@ -186,14 +190,14 @@
                     </div>
                 </div>
 
-                <!-- Selected Total & Actions -->
+                <!-- Selection Summary + Actions -->
                 <div class="selection-summary">
                     <div class="selected-total-display">
-                        <span>Your Selection:</span>
-                        <span id="selected-total" class="highlight-amount"> $0.00 </span>
+                        <span>Your Selection</span>
+                        <span id="selected-total" class="highlight-amount">$0.00</span>
                     </div>
                     <div class="action-buttons">
-                        <button id="clear-btn" class="btn secondary-btn">Clear All</button>
+                        <button id="clear-btn" class="btn secondary-btn">Clear</button>
                         <button id="submit-btn" class="btn primary-btn">Check Answer ✅</button>
                     </div>
                 </div>
@@ -201,7 +205,7 @@
         </main>
 
         <!-- Feedback Modal -->
-        <div id="feedback-modal" class="modal hidden">
+        <div id="feedback-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
             <div class="modal-content">
                 <div id="feedback-icon" class="feedback-icon">🎉</div>
                 <h3 id="feedback-title">Great Job!</h3>
@@ -212,21 +216,21 @@
         </div>
 
         <!-- Help Modal -->
-        <div id="help-modal" class="modal hidden">
+        <div id="help-modal" class="modal hidden" role="dialog" aria-modal="true">
             <div class="modal-content help-content">
                 <h2>How to Play 🧭</h2>
                 <div class="help-sections">
                     <div class="help-item">
-                        <h4>🛒 Buyer Mode (Manual Shopping)</h4>
-                        <p>Click items on the store shelf to add them to your shopping cart. See your total amount due, then select bills and coins to pay the exact amount.</p>
+                        <h4>🛒 Buyer Mode</h4>
+                        <p>Tap items on the shelf to add them to your cart. Then select bills and coins to pay the exact total.</p>
                     </div>
                     <div class="help-item">
-                        <h4>💵 Cashier Mode (Change Calculation)</h4>
-                        <p>A customer pays for items. First, calculate and enter the correct change due. Then, select the correct bills and coins to hand back as change.</p>
+                        <h4>💵 Cashier Mode</h4>
+                        <p>A customer pays for items. First enter the correct change amount, then select the bills and coins to give back.</p>
                     </div>
                     <div class="help-item">
                         <h4>⭐ Pro Tips</h4>
-                        <p>Double-click any bill in your selection to remove just one of them! Use the fewest bills and coins possible to earn an Efficiency Bonus.</p>
+                        <p>Double-tap any bill to remove one. Use the fewest pieces possible for an Efficiency Bonus. Right-click also removes one piece.</p>
                     </div>
                 </div>
                 <button id="close-help-btn" class="btn primary-btn">Got It! 👍</button>
