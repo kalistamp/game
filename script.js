@@ -162,25 +162,22 @@ function setupEventListeners() {
         generateNewProblem();
     });
 
-    // Currency buttons click (Single click = increment)
-    document.querySelectorAll('.curr-btn').forEach(btn => {
+    // Add buttons: +1 of that denomination
+    document.querySelectorAll('.add-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const type = btn.dataset.type;
             const val = parseFloat(btn.dataset.value);
-            
             gameState.selectedCurrency[val] = (gameState.selectedCurrency[val] || 0) + 1;
             playSound(type === 'bill' ? 'bill' : 'coin');
             updateUI();
         });
     });
 
-    // Minus buttons click (Decrement by 1)
-    document.querySelectorAll('.minus-btn').forEach(minBtn => {
-        minBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent parent curr-btn click
-            const type = minBtn.dataset.type;
-            const val = parseFloat(minBtn.dataset.value);
-            
+    // Remove buttons: -1 of that specific denomination only
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.dataset.type;
+            const val = parseFloat(btn.dataset.value);
             if (gameState.selectedCurrency[val] > 0) {
                 gameState.selectedCurrency[val]--;
                 playSound(type === 'bill' ? 'bill' : 'coin');
@@ -403,6 +400,12 @@ function updateUI() {
             countEl.textContent = count;
             countEl.style.display = count > 0 ? 'flex' : 'none';
         }
+        // Disable remove buttons when count is 0 so kids get clear visual feedback
+        document.querySelectorAll(`.remove-btn[data-value="${val}"]`).forEach(rBtn => {
+            const c = gameState.selectedCurrency[val] || 0;
+            rBtn.disabled = c <= 0;
+            rBtn.style.opacity = c <= 0 ? '0.5' : '1';
+        });
     });
 
     const selectedTotal = calculateSelectedTotal();

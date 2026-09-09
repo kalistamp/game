@@ -446,7 +446,7 @@ header h1 {
     gap: 10px;
 }
 
-.curr-btn {
+.curr-card {
     background: white;
     border: 2px solid var(--border-color);
     border-radius: 12px;
@@ -455,25 +455,66 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: all 0.2s;
     position: relative;
     user-select: none;
 }
 
-.curr-btn:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+.bill-card {
+    background: #f8fafc;
+    border-color: #cbd5e1;
 }
 
-.curr-btn:active {
+.curr-controls {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.add-btn, .remove-btn {
+    flex: 1;
+    padding: 8px 4px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+}
+
+.add-btn {
+    background: var(--secondary);
+    color: white;
+}
+
+.add-btn:hover {
+    background: var(--secondary-hover);
+    transform: translateY(-1px);
+}
+
+.add-btn:active {
     transform: translateY(0);
 }
 
-.bill-btn {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+.remove-btn {
+    background: var(--danger);
+    color: white;
+}
+
+.remove-btn:hover {
+    background: var(--danger-hover);
+    transform: translateY(-1px);
+}
+
+.remove-btn:active {
+    transform: translateY(0);
+}
+
+.remove-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .bill-graphic {
@@ -511,57 +552,27 @@ header h1 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Minus Button */
-.minus-btn {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    background: var(--danger);
-    color: white;
-    font-size: 14px;
-    font-weight: 800;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: transform 0.1s, background 0.2s;
-}
-
-.minus-btn:hover {
-    background: var(--danger-hover);
-    transform: scale(1.1);
-}
-
-.minus-btn:active {
-    transform: scale(0.95);
-}
-
 /* Coin specific visual touches */
-.coin-btn {
+.coin-card {
     min-height: 70px;
 }
 
-.coin-btn.quarter {
+.coin-card.quarter {
     background: #fef3c7;
     border-color: #f59e0b;
     color: #b45309;
 }
-.coin-btn.dime {
+.coin-card.dime {
     background: #f1f5f9;
     border-color: #cbd5e1;
     color: #475569;
 }
-.coin-btn.nickel {
+.coin-card.nickel {
     background: #f1f5f9;
     border-color: #94a3b8;
     color: #334155;
 }
-.coin-btn.penny {
+.coin-card.penny {
     background: #ffedd5;
     border-color: #fdba74;
     color: #9a3412;

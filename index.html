@@ -93,15 +93,16 @@
 
             <!-- Currency Selection & Wallet Area -->
             <section class="currency-workspace">
-                <h3>Select Bills & Coins <span class="tip-text">Use [+] to add, [-] to remove</span></h3>
+                <h3>Select Bills & Coins <span class="tip-text">Green + adds, Red − removes one</span></h3>
                 <div class="currency-groups">
-                    <!-- Bills Group with Real Currency Visuals & Minus Buttons -->
+                    <!-- Bills Group with Real Currency Visuals + Separate Add/Remove Buttons -->
                     <div class="currency-group">
                         <h4>Bills</h4>
                         <div class="currency-grid bills-grid">
-                            <button class="curr-btn bill-btn bill-20" data-type="bill" data-value="20">
+                            <div class="curr-card bill-card">
+                                <span class="curr-count" id="count-bill-20">0</span>
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#0288d1" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#b3e5fc" opacity="0.6"/>
@@ -112,12 +113,15 @@
                                     </svg>
                                 </div>
                                 <span class="curr-name">$20 Bill</span>
-                                <span class="curr-count" id="count-bill-20">0</span>
-                                <button class="minus-btn" data-type="bill" data-value="20" title="Remove one">-</button>
-                            </button>
-                            <button class="curr-btn bill-btn bill-10" data-type="bill" data-value="10">
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="bill" data-value="20" aria-label="Add one $20 bill">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="bill" data-value="20" aria-label="Remove one $20 bill">− Remove</button>
+                                </div>
+                            </div>
+                            <div class="curr-card bill-card">
+                                <span class="curr-count" id="count-bill-10">0</span>
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#fff3e0" stroke="#f57c00" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#f57c00" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#ffe0b2" opacity="0.6"/>
@@ -128,12 +132,15 @@
                                     </svg>
                                 </div>
                                 <span class="curr-name">$10 Bill</span>
-                                <span class="curr-count" id="count-bill-10">0</span>
-                                <button class="minus-btn" data-type="bill" data-value="10" title="Remove one">-</button>
-                            </button>
-                            <button class="curr-btn bill-btn bill-5" data-type="bill" data-value="5">
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="bill" data-value="10" aria-label="Add one $10 bill">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="bill" data-value="10" aria-label="Remove one $10 bill">− Remove</button>
+                                </div>
+                            </div>
+                            <div class="curr-card bill-card">
+                                <span class="curr-count" id="count-bill-5">0</span>
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#7b1fa2" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#e1bee7" opacity="0.6"/>
@@ -144,12 +151,15 @@
                                     </svg>
                                 </div>
                                 <span class="curr-name">$5 Bill</span>
-                                <span class="curr-count" id="count-bill-5">0</span>
-                                <button class="minus-btn" data-type="bill" data-value="5" title="Remove one">-</button>
-                            </button>
-                            <button class="curr-btn bill-btn bill-1" data-type="bill" data-value="1">
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="bill" data-value="5" aria-label="Add one $5 bill">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="bill" data-value="5" aria-label="Remove one $5 bill">− Remove</button>
+                                </div>
+                            </div>
+                            <div class="curr-card bill-card">
+                                <span class="curr-count" id="count-bill-1">0</span>
                                 <div class="bill-graphic">
-                                    <svg viewBox="0 0 120 56" class="us-bill-svg">
+                                    <svg viewBox="0 0 120 56" class="us-bill-svg" aria-hidden="true">
                                         <rect width="120" height="56" rx="4" fill="#e8f5e9" stroke="#388e3c" stroke-width="2"/>
                                         <rect x="6" y="6" width="108" height="44" fill="none" stroke="#388e3c" stroke-dasharray="2,2" stroke-width="1"/>
                                         <circle cx="60" cy="28" r="14" fill="#c8e6c9" opacity="0.6"/>
@@ -160,40 +170,54 @@
                                     </svg>
                                 </div>
                                 <span class="curr-name">$1 Bill</span>
-                                <span class="curr-count" id="count-bill-1">0</span>
-                                <button class="minus-btn" data-type="bill" data-value="1" title="Remove one">-</button>
-                            </button>
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="bill" data-value="1" aria-label="Add one $1 bill">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="bill" data-value="1" aria-label="Remove one $1 bill">− Remove</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Coins Group with Minus Buttons -->
+                    <!-- Coins Group with Separate Add/Remove Buttons -->
                     <div class="currency-group">
                         <h4>Coins</h4>
                         <div class="currency-grid coins-grid">
-                            <button class="curr-btn coin-btn quarter" data-type="coin" data-value="0.25">
+                            <div class="curr-card coin-card quarter">
+                                <span class="curr-count" id="count-coin-0.25">0</span>
                                 <span class="curr-name">Quarter</span>
                                 <span class="curr-sub">25¢</span>
-                                <span class="curr-count" id="count-coin-0.25">0</span>
-                                <button class="minus-btn" data-type="coin" data-value="0.25" title="Remove one">-</button>
-                            </button>
-                            <button class="curr-btn coin-btn dime" data-type="coin" data-value="0.10">
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="coin" data-value="0.25" aria-label="Add one quarter">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="coin" data-value="0.25" aria-label="Remove one quarter">− Remove</button>
+                                </div>
+                            </div>
+                            <div class="curr-card coin-card dime">
+                                <span class="curr-count" id="count-coin-0.10">0</span>
                                 <span class="curr-name">Dime</span>
                                 <span class="curr-sub">10¢</span>
-                                <span class="curr-count" id="count-coin-0.10">0</span>
-                                <button class="minus-btn" data-type="coin" data-value="0.10" title="Remove one">-</button>
-                            </button>
-                            <button class="curr-btn coin-btn nickel" data-type="coin" data-value="0.05">
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="coin" data-value="0.10" aria-label="Add one dime">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="coin" data-value="0.10" aria-label="Remove one dime">− Remove</button>
+                                </div>
+                            </div>
+                            <div class="curr-card coin-card nickel">
+                                <span class="curr-count" id="count-coin-0.05">0</span>
                                 <span class="curr-name">Nickel</span>
                                 <span class="curr-sub">5¢</span>
-                                <span class="curr-count" id="count-coin-0.05">0</span>
-                                <button class="minus-btn" data-type="coin" data-value="0.05" title="Remove one">-</button>
-                            </button>
-                            <button class="curr-btn coin-btn penny" data-type="coin" data-value="0.01">
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="coin" data-value="0.05" aria-label="Add one nickel">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="coin" data-value="0.05" aria-label="Remove one nickel">− Remove</button>
+                                </div>
+                            </div>
+                            <div class="curr-card coin-card penny">
+                                <span class="curr-count" id="count-coin-0.01">0</span>
                                 <span class="curr-name">Penny</span>
                                 <span class="curr-sub">1¢</span>
-                                <span class="curr-count" id="count-coin-0.01">0</span>
-                                <button class="minus-btn" data-type="coin" data-value="0.01" title="Remove one">-</button>
-                            </button>
+                                <div class="curr-controls">
+                                    <button type="button" class="add-btn" data-type="coin" data-value="0.01" aria-label="Add one penny">+ Add</button>
+                                    <button type="button" class="remove-btn" data-type="coin" data-value="0.01" aria-label="Remove one penny">− Remove</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -238,7 +262,7 @@
                     </div>
                     <div class="help-item">
                         <h4>⭐ Pro Tips</h4>
-                        <p>Use the minus button <b>[-]</b> on any bill or coin button to remove just one of them easily!</p>
+                        <p>Click <b>+ Add</b> to add a bill or coin. Click the red <b>− Remove</b> button under it to remove just one!</p>
                     </div>
                 </div>
                 <button id="close-help-btn" class="btn primary-btn">Got It! 👍</button>
