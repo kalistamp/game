@@ -214,7 +214,7 @@ header h1 {
     margin-bottom: 16px;
 }
 
-/* Store Shelf (Buyer Mode - exactly 5 items rotating) */
+/* Store Shelf */
 .shelf-section h4, .cart-section h4 {
     font-size: 14px;
     color: var(--text-muted);
@@ -461,8 +461,7 @@ header h1 {
 }
 
 .bill-card {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+    background: #faf9ef;
 }
 
 .curr-controls {
@@ -528,7 +527,6 @@ header h1 {
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    background: #ecead0;
 }
 
 .us-bill-svg {
@@ -537,14 +535,10 @@ header h1 {
     display: block;
 }
 
-.bill-card {
-    background: #faf9ef;
-}
-
-.bill-20 { border-color: #2f6f4e; }
-.bill-10 { border-color: #c07a1a; }
-.bill-5 { border-color: #6b5aa5; }
-.bill-1 { border-color: #2f5d3f; }
+.bill-20 { border-color: #1b5e20; }
+.bill-10 { border-color: #e65100; }
+.bill-5  { border-color: #4a148c; }
+.bill-1  { border-color: #1b5e20; }
 
 .president {
     font-size: 11px;
