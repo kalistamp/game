@@ -1,0 +1,545 @@
+/* CSS Reset & Variables */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary: #10b981;
+    --secondary-hover: #059669;
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --danger: #ef4444;
+    --bg-color: #f0f7ff;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+    --bill-bg: #e6f4ea;
+    --bill-border: #34a853;
+    --bill-text: #137333;
+    --coin-gold: #fbbf24;
+    --coin-silver: #94a3b8;
+    --coin-copper: #b45309;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --radius: 16px;
+}
+
+body {
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 850px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 28px;
+}
+
+header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+/* Stats Bar */
+.stats-bar {
+    background: #f8fafc;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.difficulty-box select {
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 14px;
+    background: white;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+/* Mode Tabs */
+.mode-tabs {
+    display: flex;
+    background: #e2e8f0;
+    padding: 6px;
+    gap: 6px;
+}
+
+.mode-tab {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-muted);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-tab.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Game Main Area */
+.game-main {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Scenario Card */
+.scenario-card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+}
+
+.scenario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.scenario-header h2 {
+    font-size: 18px;
+    color: var(--text-main);
+}
+
+.badge {
+    background: #dbeafe;
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.scenario-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    min-height: 60px;
+    align-items: center;
+}
+
+.item-badge {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.item-badge .emoji {
+    font-size: 22px;
+}
+
+.cashier-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.target-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px dashed var(--primary);
+}
+
+#target-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.highlight-amount {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--secondary);
+}
+
+/* Currency Workspace */
+.currency-workspace h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+
+.currency-groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 650px) {
+    .currency-groups {
+        grid-template-columns: 1fr;
+    }
+}
+
+.currency-group h4 {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.currency-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.curr-btn {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    user-select: none;
+}
+
+.curr-btn:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.curr-btn:active {
+    transform: translateY(0);
+}
+
+.bill-btn {
+    background: #f0fdf4;
+    border-color: #86efac;
+    color: #166534;
+}
+
+.bill-btn:hover {
+    border-color: #22c55e;
+    background: #dcfce7;
+}
+
+.curr-name {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.curr-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.curr-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primary);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.curr-count:empty, .curr-count:not(:not([class*="0"])) {
+    /* If count is 0, we can hide or show depending on script */
+}
+
+/* Coin specific visual touches */
+.coin-btn.quarter {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #b45309;
+}
+.coin-btn.dime {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+.coin-btn.nickel {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    color: #334155;
+}
+.coin-btn.penny {
+    background: #ffedd5;
+    border-color: #fdba74;
+    color: #9a3412;
+}
+
+/* Selection Summary */
+.selection-summary {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.selected-total-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#selected-total {
+    color: var(--primary);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background: var(--secondary);
+    color: white;
+}
+
+.primary-btn:hover {
+    background: var(--secondary-hover);
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: #e2e8f0;
+    color: var(--text-main);
+}
+
+.secondary-btn:hover {
+    background: #cbd5e1;
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 16px;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-icon {
+    font-size: 48px;
+}
+
+.modal-content h3 {
+    font-size: 24px;
+    color: var(--text-main);
+}
+
+.modal-content p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.bonus-tag {
+    background: #fef3c7;
+    color: #d97706;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.help-content {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.help-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.help-item h4 {
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.help-item p {
+    font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.hidden {
+    display: none !important;
+}
