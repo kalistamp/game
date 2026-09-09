@@ -10,14 +10,14 @@ let gameState = {
     activeCart: [],        // Items selected by user in Buyer mode
     cashierItems: [],      // Items bought in Cashier mode
     selectedCurrency: {
-        20: 0,
-        10: 0,
-        5: 0,
-        1: 0,
-        0.25: 0,
-        0.10: 0,
-        0.05: 0,
-        0.01: 0
+        "20": 0,
+        "10": 0,
+        "5": 0,
+        "1": 0,
+        "0.25": 0,
+        "0.10": 0,
+        "0.05": 0,
+        "0.01": 0
     },
     isMuted: false
 };
@@ -163,11 +163,13 @@ function setupEventListeners() {
     });
 
     // Add buttons: +1 of that denomination
+    // NOTE: use raw dataset.value string ("0.10") as key — parseFloat("0.10") becomes 0.1
+    // which creates a mismatched "0.1" key and breaks the dime counter.
     document.querySelectorAll('.add-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const type = btn.dataset.type;
-            const val = parseFloat(btn.dataset.value);
-            gameState.selectedCurrency[val] = (gameState.selectedCurrency[val] || 0) + 1;
+            const key = btn.dataset.value;
+            gameState.selectedCurrency[key] = (gameState.selectedCurrency[key] || 0) + 1;
             playSound(type === 'bill' ? 'bill' : 'coin');
             updateUI();
         });
@@ -177,9 +179,9 @@ function setupEventListeners() {
     document.querySelectorAll('.remove-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const type = btn.dataset.type;
-            const val = parseFloat(btn.dataset.value);
-            if (gameState.selectedCurrency[val] > 0) {
-                gameState.selectedCurrency[val]--;
+            const key = btn.dataset.value;
+            if ((gameState.selectedCurrency[key] || 0) > 0) {
+                gameState.selectedCurrency[key]--;
                 playSound(type === 'bill' ? 'bill' : 'coin');
                 updateUI();
             }
@@ -254,8 +256,10 @@ function generateNewProblem() {
 
     } else {
         // Cashier Mode: Calculate Change & Pay
+        // Hide the answer — do NOT show target change amount. Student must calculate it in Step 1.
         scenarioTitle.textContent = "Cashier Transaction";
-        targetLabel.textContent = "Target Change:";
+        targetLabel.textContent = "Change Due: ??? (do Step 1!)";
+        targetAmountEl.textContent = "$ ???";
         buyerWorkspace.classList.add('hidden');
         cashierWorkspace.classList.remove('hidden');
 
@@ -354,13 +358,27 @@ function renderCashierScenario() {
     cashierScenarioContent.innerHTML = '';
     let itemsHtml = gameState.cashierItems.map(i => `${i.emoji} ${i.name} ($${i.price.toFixed(2)})`).join(', ');
     let totalCost = gameState.cashierItems.reduce((s,i)=>s+i.price,0).toFixed(2);
-    
+
     cashierScenarioContent.innerHTML = `
         <div>🛍️ <b>Items Bought:</b> ${itemsHtml}</div>
         <div>💰 <b>Total Cost:</b> $${totalCost}</div>
         <div>💵 <b>Customer Handed:</b> <span style="color:var(--secondary); font-size:20px;">$${gameState.customerPayment.toFixed(2)}</span></div>
+        <div>🧮 <b>Your calculation (Step 1):</b> <span id="your-calc-preview" style="color:var(--primary);">$ ???</span></div>
     `;
-    targetAmountEl.textContent = `$${gameState.targetAmount.toFixed(2)}`;
+    // IMPORTANT: never reveal the real answer here. Keep "$ ???" until submit validates Step 1.
+    targetLabel.textContent = "Change Due: ??? (do Step 1!)";
+    targetAmountEl.textContent = "$ ???";
+
+    // Live preview of what THEY typed (not the answer) so they know their entry registered.
+    const previewEl = document.getElementById('your-calc-preview');
+    if (changeCalcInput && previewEl) {
+        const refreshPreview = () => {
+            const v = parseFloat(changeCalcInput.value);
+            previewEl.textContent = isNaN(v) ? "$ ???" : `$${v.toFixed(2)} (your entry)`;
+        };
+        changeCalcInput.oninput = refreshPreview;
+        refreshPreview();
+    }
 }
 
 function calculateSelectedTotal() {
